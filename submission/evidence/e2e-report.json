@@ -1,0 +1,15 @@
+{
+  "startedAt": "2026-10-24T13:39:16.370590+00:00",
+  "baseUrl": "http://backend:8080",
+  "checks": [
+    "Authentication and role guards; structured errors",
+    "Real simulation, independent PMT/DSCR oracle, cash-flow conservation, stress ordering, no application side effects",
+    "Server validation, duplicate months, fractional rubles, limits, forbidden fields",
+    "A: approval → offer → acceptance → simulated disbursement; DB history and scores match API",
+    "B: rejection with officer explanation and no acceptance path",
+    "C/E: information request, financial update, resubmission; new simulation and immutable old snapshots",
+    "D: cross-company access denied and lists isolated; bank filter",
+    "All 16 frozen public HTTP operations exercised and responses schema-validated"
+  ],
+  "passed": true
+}

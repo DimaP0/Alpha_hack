@@ -1,0 +1,70 @@
+name: alfa-navigator
+
+services:
+  postgres:
+    image: postgres:16.15-alpine
+    environment:
+      POSTGRES_DB: navigator
+      POSTGRES_USER: ${DATABASE_USER:-navigator}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-demo-database-password}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d navigator"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  financial-engine:
+    build: ./financial-engine
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/internal/v1/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      start_period: 10s
+      retries: 12
+    restart: unless-stopped
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres:5432/navigator
+      DATABASE_USER: ${DATABASE_USER:-navigator}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-demo-database-password}
+      JWT_SECRET: ${JWT_SECRET:-local-demo-only-secret-at-least-32-bytes-change-for-any-deployment}
+      FINANCIAL_ENGINE_URL: http://financial-engine:8000
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:5173}
+      SERVER_PORT: 8080
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      financial-engine:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 3s
+      start_period: 60s
+      retries: 12
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    environment:
+      VITE_API_BASE_URL: /api/v1
+      VITE_USE_MOCKS: "false"
+      BACKEND_URL: http://backend:8080
+    ports:
+      - "127.0.0.1:5173:5173"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:5173/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 3s
+      start_period: 15s
+      retries: 12
+    restart: unless-stopped
+volumes:
+  postgres-data:

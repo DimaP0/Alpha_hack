@@ -1,0 +1,1106 @@
+openapi: 3.0.3
+info:
+  title: ALFA Business Navigator — Public API
+  version: 1.0.0
+  description: Фиксированный HTTP-контракт React ↔ Spring Boot; синтетический демонстрационный продукт.
+servers:
+- url: http://localhost:5173
+- url: http://localhost:8080
+paths:
+  /api/v1/auth/login:
+    post:
+      tags:
+      - Auth
+      operationId: post_api_v1_auth_login
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+  /api/v1/auth/me:
+    get:
+      tags:
+      - Auth
+      operationId: get_api_v1_auth_me
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+  /api/v1/credit-products:
+    get:
+      tags:
+      - Catalog
+      operationId: get_api_v1_credit-products
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreditProduct'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+  /api/v1/companies/me:
+    get:
+      tags:
+      - Company
+      operationId: get_api_v1_companies_me
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+  /api/v1/companies/me/financials:
+    put:
+      tags:
+      - Company
+      operationId: put_api_v1_companies_me_financials
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinancialsUpdateRequest'
+  /api/v1/simulations:
+    post:
+      tags:
+      - Simulation
+      operationId: post_api_v1_simulations
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanParameters'
+  /api/v1/applications:
+    get:
+      tags:
+      - Applications
+      operationId: get_api_v1_applications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationView'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Applications
+      operationId: post_api_v1_applications
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationView'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationInput'
+  /api/v1/applications/{id}:
+    get:
+      tags:
+      - Applications
+      operationId: get_api_v1_applications_id
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationView'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      parameters: &id001
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    put:
+      tags:
+      - Applications
+      operationId: put_api_v1_applications_id
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationView'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationInput'
+      parameters: *id001
+  /api/v1/applications/{id}/submit:
+    post:
+      tags:
+      - Applications
+      operationId: post_api_v1_applications_id_submit
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationView'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      parameters: *id001
+  /api/v1/applications/{id}/resubmit:
+    post:
+      tags:
+      - Applications
+      operationId: post_api_v1_applications_id_resubmit
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationView'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      parameters: *id001
+  /api/v1/applications/{id}/accept-offer:
+    post:
+      tags:
+      - Applications
+      operationId: post_api_v1_applications_id_accept-offer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationView'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      parameters: *id001
+  /api/v1/bank/applications:
+    get:
+      tags:
+      - Bank
+      operationId: get_api_v1_bank_applications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationView'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema: &id008
+          type: string
+          enum:
+          - DRAFT
+          - CHECKING
+          - NEEDS_INFO
+          - UNDER_REVIEW
+          - OFFERED
+          - DECLINED
+          - ACCEPTED
+          - SIMULATED_ISSUED
+  /api/v1/bank/applications/{id}/decision:
+    post:
+      tags:
+      - Bank
+      operationId: post_api_v1_bank_applications_id_decision
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationView'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BankDecisionRequest'
+      parameters: *id001
+  /api/v1/bank/applications/{id}/simulate-disbursement:
+    post:
+      tags:
+      - Bank
+      operationId: post_api_v1_bank_applications_id_simulate-disbursement
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationView'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '401':
+          description: Unauthenticated
+        '403':
+          description: Forbidden
+        '409':
+          description: Invalid state transition
+        '503':
+          description: Engine unavailable
+      security:
+      - bearerAuth: []
+      parameters: *id001
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    MonthlyFinancial:
+      type: object
+      properties:
+        month:
+          type: string
+          pattern: ^\d{4}-(0[1-9]|1[0-2])$
+        revenueRub:
+          type: integer
+          minimum: 0
+        operatingExpensesRub:
+          type: integer
+          minimum: 0
+      additionalProperties: false
+      required:
+      - month
+      - revenueRub
+      - operatingExpensesRub
+    CreditProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        name:
+          type: string
+        annualRatePct:
+          type: number
+          minimum: 0
+        minAmountRub:
+          type: integer
+          minimum: 1
+        maxAmountRub:
+          type: integer
+          minimum: 1
+        allowedTermsMonths:
+          type: array
+          items:
+            type: integer
+            minimum: 1
+          minItems: 1
+      additionalProperties: false
+      required:
+      - id
+      - name
+      - annualRatePct
+      - minAmountRub
+      - maxAmountRub
+      - allowedTermsMonths
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        inn:
+          type: string
+        name:
+          type: string
+        operatingMonths:
+          type: integer
+          minimum: 0
+        cashBalanceRub:
+          type: integer
+          minimum: 0
+        existingDebtMonthlyRub:
+          type: integer
+          minimum: 0
+        latePaymentsLast12m:
+          type: integer
+          minimum: 0
+        taxDebtRub:
+          type: integer
+          minimum: 0
+        isActive:
+          type: boolean
+        financialsVersion:
+          type: integer
+          minimum: 0
+        financials:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonthlyFinancial'
+          minItems: 12
+          maxItems: 12
+      additionalProperties: false
+      required:
+      - id
+      - inn
+      - name
+      - operatingMonths
+      - cashBalanceRub
+      - existingDebtMonthlyRub
+      - latePaymentsLast12m
+      - taxDebtRub
+      - isActive
+      - financialsVersion
+      - financials
+    FinancialsUpdateRequest:
+      type: object
+      properties:
+        cashBalanceRub:
+          type: integer
+          minimum: 0
+        existingDebtMonthlyRub:
+          type: integer
+          minimum: 0
+        financials:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonthlyFinancial'
+          minItems: 12
+          maxItems: 12
+      additionalProperties: false
+      required:
+      - cashBalanceRub
+      - existingDebtMonthlyRub
+      - financials
+    LoanParameters:
+      type: object
+      properties:
+        productId: &id002
+          type: integer
+          minimum: 1
+        requestedAmountRub: &id003
+          type: integer
+          minimum: 1
+        termMonths: &id004
+          type: integer
+          minimum: 1
+        projectedRevenueUpliftMonthlyRub: &id005
+          type: integer
+          minimum: 0
+        upliftStartMonth: &id006
+          type: integer
+          minimum: 1
+      additionalProperties: false
+      required:
+      - productId
+      - requestedAmountRub
+      - termMonths
+      - projectedRevenueUpliftMonthlyRub
+      - upliftStartMonth
+    ApplicationInput:
+      type: object
+      properties:
+        productId: *id002
+        requestedAmountRub: *id003
+        termMonths: *id004
+        projectedRevenueUpliftMonthlyRub: *id005
+        upliftStartMonth: *id006
+        purpose: &id007
+          type: string
+          enum:
+          - EQUIPMENT
+          - WORKING_CAPITAL
+          - EXPANSION
+      additionalProperties: false
+      required:
+      - productId
+      - requestedAmountRub
+      - termMonths
+      - projectedRevenueUpliftMonthlyRub
+      - upliftStartMonth
+      - purpose
+    StatusHistory:
+      type: object
+      properties:
+        fromStatus:
+          type: string
+          nullable: true
+        toStatus:
+          type: string
+        actorRole:
+          type: string
+        comment:
+          type: string
+          nullable: true
+        changedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+      required:
+      - fromStatus
+      - toStatus
+      - actorRole
+      - comment
+      - changedAt
+    RiskFactor:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        impactPoints:
+          type: integer
+      additionalProperties: false
+      required:
+      - code
+      - message
+      - impactPoints
+    MonthPoint:
+      type: object
+      properties:
+        monthIndex:
+          type: integer
+          minimum: 1
+        revenueRub:
+          type: integer
+          minimum: 0
+        operatingExpensesRub:
+          type: integer
+          minimum: 0
+        debtPaymentRub:
+          type: integer
+          minimum: 0
+        netCashFlowRub:
+          type: integer
+        cashEndRub:
+          type: integer
+      additionalProperties: false
+      required:
+      - monthIndex
+      - revenueRub
+      - operatingExpensesRub
+      - debtPaymentRub
+      - netCashFlowRub
+      - cashEndRub
+    Scenario:
+      type: object
+      properties:
+        name:
+          type: string
+          enum:
+          - BASE
+          - STRESS_15
+          - STRESS_30
+        minCashBalanceRub:
+          type: integer
+        negativeCashMonths:
+          type: integer
+          minimum: 0
+        months:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonthPoint'
+          minItems: 12
+          maxItems: 12
+      additionalProperties: false
+      required:
+      - name
+      - minCashBalanceRub
+      - negativeCashMonths
+      - months
+    Alternative:
+      type: object
+      properties:
+        requestedAmountRub:
+          type: integer
+          minimum: 1
+        termMonths:
+          type: integer
+          minimum: 1
+        monthlyPaymentRub:
+          type: integer
+          minimum: 0
+        dscr:
+          type: number
+        score:
+          type: integer
+          minimum: 0
+        riskLevel:
+          type: string
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+      additionalProperties: false
+      required:
+      - requestedAmountRub
+      - termMonths
+      - monthlyPaymentRub
+      - dscr
+      - score
+      - riskLevel
+    Scoring:
+      type: object
+      properties:
+        score:
+          type: integer
+          minimum: 0
+        riskLevel:
+          type: string
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+        recommendation:
+          type: string
+          enum:
+          - APPROVE
+          - MANUAL_REVIEW
+          - DECLINE
+        dscr:
+          type: number
+        monthlyPaymentRub:
+          type: integer
+          minimum: 0
+        factors:
+          type: array
+          items:
+            $ref: '#/components/schemas/RiskFactor'
+        evaluatedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+      required:
+      - score
+      - riskLevel
+      - recommendation
+      - dscr
+      - monthlyPaymentRub
+      - factors
+      - evaluatedAt
+    SimulationResponse:
+      type: object
+      properties:
+        monthlyPaymentRub:
+          type: integer
+          minimum: 0
+        dscr:
+          type: number
+        score:
+          type: integer
+          minimum: 0
+        riskLevel:
+          type: string
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+        recommendation:
+          type: string
+          enum:
+          - APPROVE
+          - MANUAL_REVIEW
+          - DECLINE
+        factors:
+          type: array
+          items:
+            $ref: '#/components/schemas/RiskFactor'
+        scenarios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scenario'
+          minItems: 3
+          maxItems: 3
+        alternatives:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alternative'
+          minItems: 0
+          maxItems: 3
+      additionalProperties: false
+      required:
+      - monthlyPaymentRub
+      - dscr
+      - score
+      - riskLevel
+      - recommendation
+      - factors
+      - scenarios
+      - alternatives
+    Offer:
+      type: object
+      properties:
+        amountRub:
+          type: integer
+          minimum: 1
+        termMonths:
+          type: integer
+          minimum: 1
+        annualRatePct:
+          type: number
+          minimum: 0
+        comment:
+          type: string
+      additionalProperties: false
+      required:
+      - amountRub
+      - termMonths
+      - annualRatePct
+      - comment
+    CompanySnapshot:
+      type: object
+      properties:
+        company:
+          $ref: '#/components/schemas/Company'
+        product:
+          $ref: '#/components/schemas/CreditProduct'
+        capturedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+      required:
+      - company
+      - product
+      - capturedAt
+    ApplicationView:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        companyId:
+          type: integer
+          minimum: 1
+        companyName:
+          type: string
+        companyInn:
+          type: string
+        productId: *id002
+        requestedAmountRub: *id003
+        termMonths: *id004
+        projectedRevenueUpliftMonthlyRub: *id005
+        upliftStartMonth: *id006
+        purpose: *id007
+        status: *id008
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        submittedAt:
+          type: string
+          format: date-time
+          nullable: true
+        statusComment:
+          type: string
+          nullable: true
+        history:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusHistory'
+        scoring:
+          allOf:
+          - $ref: '#/components/schemas/Scoring'
+          nullable: true
+        offer:
+          allOf:
+          - $ref: '#/components/schemas/Offer'
+          nullable: true
+        financialSnapshot:
+          allOf:
+          - $ref: '#/components/schemas/CompanySnapshot'
+          nullable: true
+      additionalProperties: false
+      required:
+      - id
+      - companyId
+      - companyName
+      - companyInn
+      - productId
+      - requestedAmountRub
+      - termMonths
+      - projectedRevenueUpliftMonthlyRub
+      - upliftStartMonth
+      - purpose
+      - status
+      - createdAt
+      - updatedAt
+      - submittedAt
+      - statusComment
+      - history
+      - scoring
+      - offer
+      - financialSnapshot
+    BankDecisionRequest:
+      type: object
+      properties:
+        decision:
+          type: string
+          enum:
+          - APPROVE
+          - DECLINE
+          - REQUEST_INFO
+        comment:
+          type: string
+          minLength: 1
+        offeredAmountRub:
+          type: integer
+          minimum: 1
+        offeredTermMonths:
+          type: integer
+          minimum: 1
+      additionalProperties: false
+      required:
+      - decision
+      - comment
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      additionalProperties: false
+      required:
+      - email
+      - password
+    LoginResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        tokenType:
+          type: string
+          enum:
+          - Bearer
+        role:
+          type: string
+          enum:
+          - ENTREPRENEUR
+          - BANK_OFFICER
+        fullName:
+          type: string
+      additionalProperties: false
+      required:
+      - accessToken
+      - tokenType
+      - role
+      - fullName
+    MeResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        email:
+          type: string
+        fullName:
+          type: string
+        role:
+          type: string
+          enum:
+          - ENTREPRENEUR
+          - BANK_OFFICER
+        companyId:
+          type: integer
+          minimum: 1
+          nullable: true
+      additionalProperties: false
+      required:
+      - id
+      - email
+      - fullName
+      - role
+      - companyId
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+      additionalProperties: false
+      required:
+      - code
+      - message
+      - details

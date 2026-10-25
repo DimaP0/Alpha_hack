@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "phase": "outage",
+  "checks": [
+    "Engine outage: real 503, committed CHECKING and snapshot, no fabricated scoring or simulation side effects"
+  ]
+}

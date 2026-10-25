@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "phase": "recovery",
+  "checks": [
+    "Engine recovery: retry uses original snapshot, exactly one score and review transition"
+  ]
+}

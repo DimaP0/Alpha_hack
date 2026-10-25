@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "phase": "concurrency",
+  "checks": [
+    "Concurrent submit and conflicting officer decisions persist exactly one result"
+  ]
+}

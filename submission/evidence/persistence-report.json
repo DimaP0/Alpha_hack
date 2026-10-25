@@ -1,0 +1,8 @@
+{
+  "startedAt": "2026-10-24T13:39:24.565316+00:00",
+  "baseUrl": "http://backend:8080",
+  "checks": [
+    "F: stored applications, scores, histories and snapshots unchanged after externally performed restart"
+  ],
+  "passed": true
+}

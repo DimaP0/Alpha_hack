@@ -1,0 +1,306 @@
+openapi: 3.0.3
+info:
+  title: ALFA Business Navigator — Financial Engine Internal API
+  version: 1.0.0
+  description: HTTP-контракт Spring Boot ↔ FastAPI. Только приватная Docker-сеть.
+servers:
+- url: http://financial-engine:8000
+paths:
+  /internal/v1/health:
+    get:
+      operationId: health
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+  /internal/v1/evaluate:
+    post:
+      operationId: evaluate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EngineEvaluateRequest'
+      responses:
+        '200':
+          description: Calculated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineEvaluateResponse'
+        '422':
+          description: Invalid model input
+components:
+  schemas:
+    EngineProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        annualRatePct:
+          type: number
+          minimum: 0
+        minAmountRub:
+          type: integer
+          minimum: 1
+        maxAmountRub:
+          type: integer
+          minimum: 1
+        allowedTermsMonths:
+          type: array
+          items:
+            type: integer
+            minimum: 1
+          minItems: 1
+      additionalProperties: false
+      required:
+      - id
+      - annualRatePct
+      - minAmountRub
+      - maxAmountRub
+      - allowedTermsMonths
+    EngineCompany:
+      type: object
+      properties:
+        operatingMonths:
+          type: integer
+          minimum: 0
+        cashBalanceRub:
+          type: integer
+          minimum: 0
+        existingDebtMonthlyRub:
+          type: integer
+          minimum: 0
+        latePaymentsLast12m:
+          type: integer
+          minimum: 0
+        taxDebtRub:
+          type: integer
+          minimum: 0
+        isActive:
+          type: boolean
+        financials:
+          type: array
+          items:
+            type: object
+            properties:
+              month:
+                type: string
+                pattern: ^\d{4}-(0[1-9]|1[0-2])$
+              revenueRub:
+                type: integer
+                minimum: 0
+              operatingExpensesRub:
+                type: integer
+                minimum: 0
+            required:
+            - month
+            - revenueRub
+            - operatingExpensesRub
+            additionalProperties: false
+          minItems: 12
+          maxItems: 12
+      additionalProperties: false
+      required:
+      - operatingMonths
+      - cashBalanceRub
+      - existingDebtMonthlyRub
+      - latePaymentsLast12m
+      - taxDebtRub
+      - isActive
+      - financials
+    EngineEvaluateRequest:
+      type: object
+      properties:
+        applicationId:
+          type: integer
+          minimum: 1
+          nullable: true
+        product:
+          $ref: '#/components/schemas/EngineProduct'
+        company:
+          $ref: '#/components/schemas/EngineCompany'
+        requestedAmountRub:
+          type: integer
+          minimum: 1
+        termMonths:
+          type: integer
+          minimum: 1
+        projectedRevenueUpliftMonthlyRub:
+          type: integer
+          minimum: 0
+        upliftStartMonth:
+          type: integer
+          minimum: 1
+          maximum: 12
+      additionalProperties: false
+      required:
+      - applicationId
+      - product
+      - company
+      - requestedAmountRub
+      - termMonths
+      - projectedRevenueUpliftMonthlyRub
+      - upliftStartMonth
+    RiskFactor:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        impactPoints:
+          type: integer
+      additionalProperties: false
+      required:
+      - code
+      - message
+      - impactPoints
+    MonthPoint:
+      type: object
+      properties:
+        monthIndex:
+          type: integer
+          minimum: 1
+        revenueRub:
+          type: integer
+          minimum: 0
+        operatingExpensesRub:
+          type: integer
+          minimum: 0
+        debtPaymentRub:
+          type: integer
+          minimum: 0
+        netCashFlowRub:
+          type: integer
+        cashEndRub:
+          type: integer
+      additionalProperties: false
+      required:
+      - monthIndex
+      - revenueRub
+      - operatingExpensesRub
+      - debtPaymentRub
+      - netCashFlowRub
+      - cashEndRub
+    Scenario:
+      type: object
+      properties:
+        name:
+          type: string
+          enum:
+          - BASE
+          - STRESS_15
+          - STRESS_30
+        minCashBalanceRub:
+          type: integer
+        negativeCashMonths:
+          type: integer
+          minimum: 0
+        months:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonthPoint'
+          minItems: 12
+          maxItems: 12
+      additionalProperties: false
+      required:
+      - name
+      - minCashBalanceRub
+      - negativeCashMonths
+      - months
+    Alternative:
+      type: object
+      properties:
+        requestedAmountRub:
+          type: integer
+          minimum: 1
+        termMonths:
+          type: integer
+          minimum: 1
+        monthlyPaymentRub:
+          type: integer
+          minimum: 0
+        dscr:
+          type: number
+        score:
+          type: integer
+          minimum: 0
+        riskLevel:
+          type: string
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+      additionalProperties: false
+      required:
+      - requestedAmountRub
+      - termMonths
+      - monthlyPaymentRub
+      - dscr
+      - score
+      - riskLevel
+    EngineEvaluateResponse:
+      type: object
+      properties:
+        monthlyPaymentRub:
+          type: integer
+          minimum: 0
+        dscr:
+          type: number
+        score:
+          type: integer
+          minimum: 0
+        riskLevel:
+          type: string
+          enum:
+          - LOW
+          - MEDIUM
+          - HIGH
+        recommendation:
+          type: string
+          enum:
+          - APPROVE
+          - MANUAL_REVIEW
+          - DECLINE
+        factors:
+          type: array
+          items:
+            $ref: '#/components/schemas/RiskFactor'
+        scenarios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scenario'
+          minItems: 3
+          maxItems: 3
+        alternatives:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alternative'
+          minItems: 0
+          maxItems: 3
+      additionalProperties: false
+      required:
+      - monthlyPaymentRub
+      - dscr
+      - score
+      - riskLevel
+      - recommendation
+      - factors
+      - scenarios
+      - alternatives
+    Health:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+      additionalProperties: false
+      required:
+      - status

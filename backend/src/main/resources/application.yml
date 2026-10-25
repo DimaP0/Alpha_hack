@@ -1,0 +1,33 @@
+server:
+  port: ${SERVER_PORT:8080}
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/navigator}
+    username: ${DATABASE_USER:navigator}
+    password: ${DATABASE_PASSWORD:demo-database-password}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.jdbc.time_zone: UTC
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+      accept-float-as-int: false
+    mapper:
+      allow-coercion-of-scalars: false
+  flyway:
+    enabled: true
+app:
+  jwt-secret: ${JWT_SECRET:local-demo-only-secret-at-least-32-bytes-change-for-any-deployment}
+  financial-engine-url: ${FINANCIAL_ENGINE_URL:http://localhost:8000}
+  cors-allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never

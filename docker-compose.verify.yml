@@ -1,0 +1,11 @@
+services:
+  verification:
+    profiles: [verification]
+    build:
+      context: .
+      dockerfile: scripts/Dockerfile
+    environment:
+      TEST_DATABASE_URL: postgresql://${DATABASE_USER:-navigator}:${DATABASE_PASSWORD:-demo-database-password}@postgres:5432/navigator
+    command: ["--base-url", "http://backend:8080"]
+    volumes:
+      - ./verification-results:/project/verification-results

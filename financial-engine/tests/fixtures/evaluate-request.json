@@ -1,0 +1,90 @@
+{
+  "applicationId": null,
+  "product": {
+    "id": 1,
+    "annualRatePct": 20,
+    "minAmountRub": 100000,
+    "maxAmountRub": 10000000,
+    "allowedTermsMonths": [
+      12,
+      24,
+      36,
+      48,
+      60
+    ]
+  },
+  "company": {
+    "operatingMonths": 48,
+    "cashBalanceRub": 1800000,
+    "existingDebtMonthlyRub": 120000,
+    "latePaymentsLast12m": 0,
+    "taxDebtRub": 0,
+    "isActive": true,
+    "financials": [
+      {
+        "month": "2025-10",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2025-11",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2025-12",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2026-01",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2026-02",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2026-03",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2026-04",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2026-05",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2026-06",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2026-07",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2026-08",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      },
+      {
+        "month": "2026-09",
+        "revenueRub": 2100000,
+        "operatingExpensesRub": 1450000
+      }
+    ]
+  },
+  "requestedAmountRub": 3000000,
+  "termMonths": 36,
+  "projectedRevenueUpliftMonthlyRub": 150000,
+  "upliftStartMonth": 4
+}

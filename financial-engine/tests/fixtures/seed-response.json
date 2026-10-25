@@ -1,0 +1,351 @@
+{
+  "monthlyPaymentRub": 111491,
+  "dscr": 2.81,
+  "score": 1000,
+  "riskLevel": "LOW",
+  "recommendation": "APPROVE",
+  "factors": [
+    {
+      "code": "STRONG_CASH_FLOW",
+      "message": "DSCR не ниже 2: текущая операционная маржа покрывает платежи вдвое.",
+      "impactPoints": 0
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "BASE",
+      "minCashBalanceRub": 2218509,
+      "negativeCashMonths": 0,
+      "months": [
+        {
+          "monthIndex": 1,
+          "revenueRub": 2100000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 418509,
+          "cashEndRub": 2218509
+        },
+        {
+          "monthIndex": 2,
+          "revenueRub": 2100000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 418509,
+          "cashEndRub": 2637018
+        },
+        {
+          "monthIndex": 3,
+          "revenueRub": 2100000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 418509,
+          "cashEndRub": 3055527
+        },
+        {
+          "monthIndex": 4,
+          "revenueRub": 2250000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 568509,
+          "cashEndRub": 3624036
+        },
+        {
+          "monthIndex": 5,
+          "revenueRub": 2250000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 568509,
+          "cashEndRub": 4192545
+        },
+        {
+          "monthIndex": 6,
+          "revenueRub": 2250000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 568509,
+          "cashEndRub": 4761054
+        },
+        {
+          "monthIndex": 7,
+          "revenueRub": 2250000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 568509,
+          "cashEndRub": 5329563
+        },
+        {
+          "monthIndex": 8,
+          "revenueRub": 2250000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 568509,
+          "cashEndRub": 5898072
+        },
+        {
+          "monthIndex": 9,
+          "revenueRub": 2250000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 568509,
+          "cashEndRub": 6466581
+        },
+        {
+          "monthIndex": 10,
+          "revenueRub": 2250000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 568509,
+          "cashEndRub": 7035090
+        },
+        {
+          "monthIndex": 11,
+          "revenueRub": 2250000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 568509,
+          "cashEndRub": 7603599
+        },
+        {
+          "monthIndex": 12,
+          "revenueRub": 2250000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 568509,
+          "cashEndRub": 8172108
+        }
+      ]
+    },
+    {
+      "name": "STRESS_15",
+      "minCashBalanceRub": 1903509,
+      "negativeCashMonths": 0,
+      "months": [
+        {
+          "monthIndex": 1,
+          "revenueRub": 1785000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 103509,
+          "cashEndRub": 1903509
+        },
+        {
+          "monthIndex": 2,
+          "revenueRub": 1785000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 103509,
+          "cashEndRub": 2007018
+        },
+        {
+          "monthIndex": 3,
+          "revenueRub": 1785000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 103509,
+          "cashEndRub": 2110527
+        },
+        {
+          "monthIndex": 4,
+          "revenueRub": 1935000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 253509,
+          "cashEndRub": 2364036
+        },
+        {
+          "monthIndex": 5,
+          "revenueRub": 1935000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 253509,
+          "cashEndRub": 2617545
+        },
+        {
+          "monthIndex": 6,
+          "revenueRub": 1935000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 253509,
+          "cashEndRub": 2871054
+        },
+        {
+          "monthIndex": 7,
+          "revenueRub": 1935000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 253509,
+          "cashEndRub": 3124563
+        },
+        {
+          "monthIndex": 8,
+          "revenueRub": 1935000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 253509,
+          "cashEndRub": 3378072
+        },
+        {
+          "monthIndex": 9,
+          "revenueRub": 1935000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 253509,
+          "cashEndRub": 3631581
+        },
+        {
+          "monthIndex": 10,
+          "revenueRub": 1935000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 253509,
+          "cashEndRub": 3885090
+        },
+        {
+          "monthIndex": 11,
+          "revenueRub": 1935000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 253509,
+          "cashEndRub": 4138599
+        },
+        {
+          "monthIndex": 12,
+          "revenueRub": 1935000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": 253509,
+          "cashEndRub": 4392108
+        }
+      ]
+    },
+    {
+      "name": "STRESS_30",
+      "minCashBalanceRub": 612108,
+      "negativeCashMonths": 0,
+      "months": [
+        {
+          "monthIndex": 1,
+          "revenueRub": 1470000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -211491,
+          "cashEndRub": 1588509
+        },
+        {
+          "monthIndex": 2,
+          "revenueRub": 1470000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -211491,
+          "cashEndRub": 1377018
+        },
+        {
+          "monthIndex": 3,
+          "revenueRub": 1470000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -211491,
+          "cashEndRub": 1165527
+        },
+        {
+          "monthIndex": 4,
+          "revenueRub": 1620000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -61491,
+          "cashEndRub": 1104036
+        },
+        {
+          "monthIndex": 5,
+          "revenueRub": 1620000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -61491,
+          "cashEndRub": 1042545
+        },
+        {
+          "monthIndex": 6,
+          "revenueRub": 1620000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -61491,
+          "cashEndRub": 981054
+        },
+        {
+          "monthIndex": 7,
+          "revenueRub": 1620000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -61491,
+          "cashEndRub": 919563
+        },
+        {
+          "monthIndex": 8,
+          "revenueRub": 1620000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -61491,
+          "cashEndRub": 858072
+        },
+        {
+          "monthIndex": 9,
+          "revenueRub": 1620000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -61491,
+          "cashEndRub": 796581
+        },
+        {
+          "monthIndex": 10,
+          "revenueRub": 1620000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -61491,
+          "cashEndRub": 735090
+        },
+        {
+          "monthIndex": 11,
+          "revenueRub": 1620000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -61491,
+          "cashEndRub": 673599
+        },
+        {
+          "monthIndex": 12,
+          "revenueRub": 1620000,
+          "operatingExpensesRub": 1450000,
+          "debtPaymentRub": 231491,
+          "netCashFlowRub": -61491,
+          "cashEndRub": 612108
+        }
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "requestedAmountRub": 3000000,
+      "termMonths": 36,
+      "monthlyPaymentRub": 111491,
+      "dscr": 2.81,
+      "score": 1000,
+      "riskLevel": "LOW"
+    },
+    {
+      "requestedAmountRub": 2400000,
+      "termMonths": 36,
+      "monthlyPaymentRub": 89193,
+      "dscr": 3.11,
+      "score": 1000,
+      "riskLevel": "LOW"
+    },
+    {
+      "requestedAmountRub": 1800000,
+      "termMonths": 36,
+      "monthlyPaymentRub": 66894,
+      "dscr": 3.48,
+      "score": 1000,
+      "riskLevel": "LOW"
+    }
+  ]
+}

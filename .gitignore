@@ -1,0 +1,14 @@
+**/node_modules/
+**/dist/
+**/target/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.m2/
+**/coverage/
+**/*.log
+.env
+.idea/
+.vscode/
+verification-results/
+*.tsbuildinfo
